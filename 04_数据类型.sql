@@ -31,3 +31,9 @@ update class set status = 200 where id = 6;
 alter table class add stat tinyint unsigned;
 update class set stat = 200 where id = 6;
 
+-- #zerofill
+alter table class add status int(5) zerofill;
+update class set status = 123 where id = 6;
+-- 00123, GUI不显示，通过 mysql> 可以查验
+select * from class;
+
