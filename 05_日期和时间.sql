@@ -19,3 +19,16 @@ select DAYOFWEEK(NOW()), WEEKDAY(NOW());
 
 select * from article where status = 0 and publish_time < NOW();
 update article set status = 1 where status = 0 and publish_time < NOW();
+
+-- time diff
+set @time = time(now());
+select @time;
+select time_to_sec(@time), sec_to_time(time_to_sec(@time));
+
+select to_days(now()), from_days(to_days(now()));
+
+select datediff(now(), birthday) from stu;
+select timediff(time(now()), time(birthday)) from stu;
+
+select timestampdiff(YEAR, birthday, now()) from stu;
+
