@@ -1,4 +1,4 @@
---- string
+--- string function
 
 show charset;
 select left(cname, 2), right(cname, 2), mid(cname, 2, 1) from class;
@@ -12,5 +12,13 @@ select char_length(cname) from class;
 select concat('No:', id) as id, concat('class:', cname) from class;
 
 select if(char_length(cname) > 8, concat(left(cname, 8), '...'), cname) as cname from class;
+
+-- regexp
+select * from class where cname regexp '^.h';
+select * from class where description regexp 'php|mysql';
+
+update class set cname = replace(cname, cname, concat('LX:', cname)) where description regexp 'php|mysql';
+
+select * from class where cname like '_t%';
 
 select * from class;
