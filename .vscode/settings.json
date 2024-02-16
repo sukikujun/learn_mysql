@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "47.94.11.160",
+            "port": 6207,
+            "driver": "MySQL",
+            "name": "docker mysql5.7",
+            "database": "houdunren",
+            "username": "root"
+        }
+    ]
+}

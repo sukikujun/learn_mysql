@@ -22,3 +22,12 @@ update class set cname = replace(cname, cname, concat('LX:', cname)) where descr
 select * from class where cname like '_t%';
 
 select * from class;
+
+alter table class add status tinyint;
+desc class;
+-- Out of range value for column 'status' at row 1
+update class set status = 200 where id = 6;
+-- 无符号整数
+alter table class add stat tinyint unsigned;
+update class set stat = 200 where id = 6;
+
