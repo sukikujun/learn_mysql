@@ -32,3 +32,24 @@ select timediff(time(now()), time(birthday)) from stu;
 
 select timestampdiff(YEAR, birthday, now()) from stu;
 
+-- date 
+select * from stu where birthday between '1990-01-01' and '1999-12-31';
+
+select * from stu where birthday = (
+    select birthday from stu order by birthday desc limit 1
+);
+select * from stu where class_id in (1, 2) and YEAR(birthday) = 1999;
+
+select count(id) as total, class_id from stu 
+where YEAR(birthday) >= 1990 and YEAR(birthday) <= 2000
+group by class_id
+order by total desc
+limit 1;
+
+select count(id) as total, class_id from stu
+where timestampdiff(YEAR, birthday, now()) > 20 and gender = 2
+group by class_id
+order by total desc 
+limit 1;
+
+select timestampdiff(YEAR, birthday, NOW()) from stu;
