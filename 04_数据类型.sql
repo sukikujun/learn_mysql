@@ -62,3 +62,22 @@ insert into stu(sname, class_id, gender) values('mememori', 2, 2);
 
 
 select *, if(gender=1, '男同学', '女同学') from stu where id <= 12;
+
+-- Set
+create table article (
+    id int not null primary key auto_increment,
+    title varchar(100) not null,
+    publish_time datetime,
+    status tinyint default 1,
+    click int default 0
+);
+alter table article add flag set('Recommand', 'Top', 'Hot', 'Picture');
+
+desc article;
+
+insert into article(title, flag) values('Docker Book', 'Recommand');
+insert into article(title, flag) values('MySQL so useful! so easy!', 'Top,Picture');
+
+select * from article where find_in_set('top', flag);
+select * from article where flag like '%top%';
+select * from article where flag = 'top,hot';
