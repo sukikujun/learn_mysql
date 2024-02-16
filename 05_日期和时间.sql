@@ -63,3 +63,8 @@ select date_add(now(), interval 10 year);
 select date_add(now(), interval "10:22" HOUR_MINUTE);
 
 select date_sub(now(), interval "3 12" DAY_HOUR);
+
+-- last_day
+select last_day(now());
+
+select date_sub(now(), interval dayofmonth(now()) - 1 day);
