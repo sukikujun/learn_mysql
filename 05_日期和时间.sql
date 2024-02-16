@@ -81,3 +81,14 @@ select * from article where publish_time >= date_format(date_sub(now(), interval
 select last_day(date_sub(now(), interval 1 month));
 
 select date_add(last_day(now()), interval 1 day);
+
+-- week
+select * from stu where birthday <= date_sub(now(), interval 20 year);
+
+select date_add(now(), interval 1-dayofweek(now()) day);
+
+select date_sub(date_add(now(), interval 1-weekday(now()) day), interval 21 day);
+
+set @week = date_sub(now(), interval 1 week);
+select @week;
+select date_add(@week, interval 0-weekday(@week) day);
