@@ -53,3 +53,13 @@ order by total desc
 limit 1;
 
 select timestampdiff(YEAR, birthday, NOW()) from stu;
+
+-- #addtime() timestamp() date_add() date_sub()
+select addtime(now(), '08:00:00');
+select timestamp(now(), '08:00:00');
+
+select date_add(now(), interval 10 year);
+
+select date_add(now(), interval "10:22" HOUR_MINUTE);
+
+select date_sub(now(), interval "3 12" DAY_HOUR);
