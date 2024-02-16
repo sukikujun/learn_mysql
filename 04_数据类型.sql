@@ -37,3 +37,9 @@ update class set status = 123 where id = 6;
 -- 00123, GUI不显示，通过 mysql> 可以查验
 select * from class;
 
+-- #float & decimal
+alter table class add a float(10, 2);
+update class set a = 992345.99 where id = 6;
+alter table class add b decimal(10, 2);
+update class set b = 992345.99 where id = 6;
+
