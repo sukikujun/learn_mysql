@@ -92,3 +92,22 @@ select date_sub(date_add(now(), interval 1-weekday(now()) day), interval 21 day)
 set @week = date_sub(now(), interval 1 week);
 select @week;
 select date_add(@week, interval 0-weekday(@week) day);
+
+--attendance
+create table attendance(
+    id int not null primary key auto_increment,
+    stu_id int not null,
+    created_at datetime not null
+) charset utf8mb4;
+
+insert into attendance(stu_id, created_at) values(1, '2024-2-15 08:22:00'),(2, '2024-2-15 09:22:00'),(3, '2024-2-15 07:22:00'),(4, '2024-2-15 10:55:00'),(5, '2024-2-15 07:15:00'),(6, '2024-2-16 11:15:00'),(7, '2024-2-10 08:22:00'),(8, '2024-2-11 08:15:00');
+select * from attendance;
+
+select * from attendance where created_at >=  date_sub(now(), interval dayofmonth(now()) - 1 day);
+select time(now()), now();
+
+select stu_id, count(id) from attendance
+where time(created_at) > '08:30:00'
+and date(created_at) > date(date_sub(now(), interval dayofmonth(now())-1 day))
+group by stu_id
+having count(id) >= 2;
