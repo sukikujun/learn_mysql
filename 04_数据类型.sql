@@ -43,3 +43,22 @@ update class set a = 992345.99 where id = 6;
 alter table class add b decimal(10, 2);
 update class set b = 992345.99 where id = 6;
 
+-- #enum
+create table stu(
+    id int not null primary key auto_increment,
+    sname varchar(100) not null,
+    class_id int null,
+    birthday datetime null,
+    updated_at timestamp not null,
+    gender tinyint
+);
+
+desc stu;
+update stu set gender = null;
+alter table stu modify gender ENUM('male', 'female') default NULL;
+
+insert into stu(sname, class_id, gender) values('sahiro', 2, 'Female');
+insert into stu(sname, class_id, gender) values('mememori', 2, 2);
+
+
+select *, if(gender=1, '男同学', '女同学') from stu where id <= 12;
