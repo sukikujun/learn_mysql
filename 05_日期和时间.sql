@@ -111,3 +111,20 @@ where time(created_at) > '08:30:00'
 and date(created_at) > date(date_sub(now(), interval dayofmonth(now())-1 day))
 group by stu_id
 having count(id) >= 2;
+
+--week
+select date_add(now(), interval 0-weekday(now()) day);
+
+select * from attendance
+where date(created_at) >= date(date_add(now(), interval 0-weekday(now()) day))
+and time(created_at) >= '09:00:00';
+
+set @week = date_sub(now(), interval 1 week);
+select @week;
+
+select * from attendance
+where date(created_at) >= date(date_add(@week, interval 0-weekday(@week) day))
+and date(created_at) <= date(date_add(@week, interval 4-weekday(@week) day))
+and time(created_at) > '08:30:00';
+
+select date(date_add(@week, interval 0-weekday(@week) day)), date(date_add(@week, interval 4-weekday(@week) day));
