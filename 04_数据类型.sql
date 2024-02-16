@@ -81,3 +81,7 @@ insert into article(title, flag) values('MySQL so useful! so easy!', 'Top,Pictur
 select * from article where find_in_set('top', flag);
 select * from article where flag like '%top%';
 select * from article where flag = 'top,hot';
+
+-- #2bit match set
+-- 0001 0010 0100 1000
+select * from article where flag & 15;
