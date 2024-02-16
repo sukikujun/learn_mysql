@@ -68,3 +68,16 @@ select date_sub(now(), interval "3 12" DAY_HOUR);
 select last_day(now());
 
 select date_sub(now(), interval dayofmonth(now()) - 1 day);
+
+-- 月初月末计算
+select * from article
+where publish_time <= last_day(now())
+and publish_time >= date_sub(now(), interval dayofmonth(now())-1 day);
+
+select * from article where publish_time >= date_sub(now(), interval 3 month);
+
+select * from article where publish_time >= date_format(date_sub(now(), interval 3 month), '%Y-%m-01');
+
+select last_day(date_sub(now(), interval 1 month));
+
+select date_add(last_day(now()), interval 1 day);
