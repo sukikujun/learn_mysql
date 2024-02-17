@@ -22,3 +22,8 @@ select AVG(click) from article;
 select * from article where click < (select AVG(click) from article);
 
 select round(avg(timestampdiff(year,birthday,now()))) as age from stu;
+
+-- DISTINCT
+select distinct class_id from stu where class_id is not null;
+
+select count(distinct class_id, sname) from stu where class_id is not null;
