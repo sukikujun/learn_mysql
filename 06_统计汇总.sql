@@ -27,3 +27,10 @@ select round(avg(timestampdiff(year,birthday,now()))) as age from stu;
 select distinct class_id from stu where class_id is not null;
 
 select count(distinct class_id, sname) from stu where class_id is not null;
+
+-- group by
+select count(class_id), class_id from stu where class_id is not null and gender = 1 group by class_id;
+
+select MIN(birthday), class_id from stu group by class_id;
+
+select * from stu where birthday in (select min(birthday) from stu group by class_id) and birthday is not null;
