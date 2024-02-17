@@ -41,3 +41,18 @@ select count(*), class_id, gender from stu group by class_id, gender;
 select count(*), class_id, gender from stu where class_id is not null group by class_id, gender order by class_id desc;
 
 select class_id, count(*) as c from stu group by class_id having c >= 2;
+
+-- 实战
+select * from attendance;
+
+set @monday = date(date_add(now(), interval 2-dayofweek(now()) day));
+select @monday;
+
+set @friday = date_add(@monday, interval 5 day);
+select @friday;
+
+select count(*) c, stu_id from attendance
+where created_at >= @monday and created_at <= @friday
+and time(created_at) > '08:30:00'
+group by stu_id
+having c >= 2;
