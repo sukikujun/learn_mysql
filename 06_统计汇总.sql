@@ -45,3 +45,7 @@ select min(click) from article;
 select * from article where click = (
     select min(click) from article
 );
+
+-- 'ONLY_FULL_GROUP_BY' mode
+set sql_mode=(select replace(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));
+select min(click), id from article;
