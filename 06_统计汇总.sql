@@ -56,3 +56,24 @@ where created_at >= @monday and created_at <= @friday
 and time(created_at) > '08:30:00'
 group by stu_id
 having c >= 2;
+
+--一周哪一天迟到的人最多
+select count(*) times, date(created_at) day from attendance
+where created_at >= @monday and created_at <= @friday
+and time(created_at) > '08:30:00'
+group by day
+order by times desc
+limit 1;
+
+-- 哪个姓氏的人最多
+select count(*) times, left(sname, 1) as first_name
+from stu
+group by first_name
+order by times desc
+limit 1;
+
+-- 姓氏超过两个同学的姓氏
+select count(*) times, left(sname, 1) as first_name
+from stu
+group by first_name
+having times >= 2;
