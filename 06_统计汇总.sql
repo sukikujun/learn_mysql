@@ -34,3 +34,10 @@ select count(class_id), class_id from stu where class_id is not null and gender 
 select MIN(birthday), class_id from stu group by class_id;
 
 select * from stu where birthday in (select min(birthday) from stu group by class_id) and birthday is not null;
+
+-- having 
+select count(*), class_id, gender from stu group by class_id, gender;
+
+select count(*), class_id, gender from stu where class_id is not null group by class_id, gender order by class_id desc;
+
+select class_id, count(*) as c from stu group by class_id having c >= 2;
