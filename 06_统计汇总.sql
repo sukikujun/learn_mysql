@@ -14,3 +14,9 @@ select sname, birthday, month(birthday) as m from stu order by m desc;
 select sname, birthday, mid(birthday, 6, 2) as m from stu where birthday is not null order by m;
 
 select * from stu where year(birthday) > 1990 order by birthday asc limit 1;
+-- filed()
+select field('a', 'c', 'a', 'b'); -- a 的 索引
+select sname,
+    left(sname, 1) as s
+from stu
+order by FIELD(s, 'n', 'm') desc;
