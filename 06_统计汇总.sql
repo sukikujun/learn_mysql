@@ -28,3 +28,20 @@ select count(*), gender from stu where gender = 2;
 select count(*) from stu where class_id is not null;
 --不会统计NULL
 select count(class_id) from stu;
+
+-- MIN() MAX()
+select class_id from stu
+where class_id is not null
+order by class_id desc
+limit 1;
+
+select MAX(class_id) from stu;
+select MIN(class_id) from stu;
+
+-- age least
+select year(max(birthday)) from stu;
+
+select min(click) from article;
+select * from article where click = (
+    select min(click) from article
+);
