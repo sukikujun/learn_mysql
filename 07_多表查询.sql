@@ -34,3 +34,12 @@ select c.cname from stu as s right join class as c on s.class_id = c.id where s.
 
 --#class name null -> 无
 select s.sname, if(c.id, c.cname, '无') from stu as s left join class as c on s.class_id = c.id;
+
+--self join
+select sname from stu where class_id = (select class_id from stu where sname = '后盾人') and sname <> '后盾人';
+
+select s2.sname from stu as s1 join stu as s2 on s1.class_id = s2.class_id where s1.sname = '后盾人' and s2.sname <> '后盾人';
+
+select s2.sname from stu as s1 join stu as s2 on YEAR(s1.birthday) = YEAR(s2.birthday) where s1.sname = '后盾人' and s2.sname <> '后盾人';
+
+select s2.sname from stu as s1 join stu as s2 on YEAR(s1.birthday) > YEAR(s2.birthday) where s1.sname = '后盾人';
