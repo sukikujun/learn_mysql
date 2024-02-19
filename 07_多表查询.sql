@@ -60,3 +60,14 @@ select class_id, count(*) times from stu as s inner join stu_lesson as sl inner 
 
 --#最新发布的文章和学生学习的课程组合网站的最新动态
 (select concat(s.sname, '发表了: ', a.title) from article as a join stu as s on s.id = a.stu_id order by a.id desc limit 3) union all (select concat(s.sname, '正在学习: ', l.name) from stu as s inner join stu_lesson as sl inner join lesson as l on s.id = sl.stu_id and l.id = sl.lesson_id limit 3) order by rand();
+
+-- 删除没有学习任何课程的同学
+--create table stu2 select * from stu;
+--insert into stu2 select * from stu;
+delete from stu2 where id in (
+    select s.id from stu as s left join stu_lesson as sl on s.id = sl.stu_id where sl.lesson_id is null
+);
+
+--truncate stu2;
+delete s from stu2 as s left join stu_lesson as sl on s.id = sl.stu_id where sl.lesson_id is null;
+--select * from stu2;
