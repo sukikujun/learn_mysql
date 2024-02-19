@@ -51,3 +51,12 @@ select s.sname, sl.lesson_id from stu as s inner join stu_lesson as sl on s.id =
 
 --#哪个班最喜欢PHP
 select class_id, count(*) times from stu as s inner join stu_lesson as sl inner join lesson as l on s.id = sl.stu_id and l.id = sl.lesson_id where l.name = 'PHP' group by s.class_id order by times desc limit 1;
+
+-- union
+(select sname from stu limit 3) union all (select cname from class limit 3) order by rand() limit 2;
+
+--#年龄最大和年龄最小的学生
+(select * from stu where birthday is not null order by birthday asc limit 1) union all (select * from stu where birthday is not null order by birthday desc limit 1);
+
+--#最新发布的文章和学生学习的课程组合网站的最新动态
+(select concat(s.sname, '发表了: ', a.title) from article as a join stu as s on s.id = a.stu_id order by a.id desc limit 3) union all (select concat(s.sname, '正在学习: ', l.name) from stu as s inner join stu_lesson as sl inner join lesson as l on s.id = sl.stu_id and l.id = sl.lesson_id limit 3) order by rand();
