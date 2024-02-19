@@ -43,3 +43,11 @@ select s2.sname from stu as s1 join stu as s2 on s1.class_id = s2.class_id where
 select s2.sname from stu as s1 join stu as s2 on YEAR(s1.birthday) = YEAR(s2.birthday) where s1.sname = '后盾人' and s2.sname <> '后盾人';
 
 select s2.sname from stu as s1 join stu as s2 on YEAR(s1.birthday) > YEAR(s2.birthday) where s1.sname = '后盾人';
+
+-- m:n 多对多
+select s.sname, l.name from stu as s inner join stu_lesson as sl inner join lesson as l on s.id = sl.stu_id and l.id = sl.lesson_id where s.sname = '后盾人';
+
+select s.sname, sl.lesson_id from stu as s inner join stu_lesson as sl on s.id = sl.stu_id  where s.sname = '后盾人';
+
+--#哪个班最喜欢PHP
+select class_id, count(*) times from stu as s inner join stu_lesson as sl inner join lesson as l on s.id = sl.stu_id and l.id = sl.lesson_id where l.name = 'PHP' group by s.class_id order by times desc limit 1;
