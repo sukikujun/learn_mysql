@@ -21,3 +21,16 @@ select c.id, c.cname, count(*) times from stu as s inner join class as c on s.cl
 
 -- 每个班级的文章平均点击数与总点击数
 select c.id, c.cname, SUM(click), AVG(click) from stu as s inner join class as c on s.class_id = c.id inner join article as a on s.id = a.stu_id group by c.id;
+
+-- left/right join
+--#not bind qq students
+select s.id, s.sname, si.qq from stu as s left join stu_info as si on s.id = si.stu_id where si.qq is null;
+
+--#not publish article students
+select s.id, s.sname, a.id, a.title from stu as s left join article as a on s.id = a.stu_id where a.id is null;
+
+--#not student's class
+select c.cname from stu as s right join class as c on s.class_id = c.id where s.id is null;
+
+--#class name null -> 无
+select s.sname, if(c.id, c.cname, '无') from stu as s left join class as c on s.class_id = c.id;
