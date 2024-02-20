@@ -13,3 +13,12 @@ start transaction;
 insert into stu(sname, class_id, sex) values('李海', 2, 2);
 rollback;
 
+-- global transaction
+set autocommit = 0;
+insert into stu(class_id, sname, sex) values(2,'李华',1);
+commit;
+
+
+insert into stu(class_id, sname, sex) values(2,'李华2',1);
+insert into stu(class_id, sname, sex) values(2,'李华3',1);
+commit;
