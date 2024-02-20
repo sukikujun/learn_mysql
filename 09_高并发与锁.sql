@@ -53,3 +53,18 @@ commit;
 set autocommit = 0;
 --阻塞，t1提交后，version不符合
 update goods set num = num-100, version = version+1 where version = 0 and id = 1;
+
+-- Lock Read/Write
+--t1
+lock table goods read;
+select * from goods;
+insert into goods(name, num) values('pixel', 100);
+unlock tables;
+
+lock table goods write;
+select * from goods;
+unlock tables;
+
+--t2
+-- t1 unlock之前将被挂起，释放锁之后才执行
+insert into goods(name, num) values('pixel', 200);
