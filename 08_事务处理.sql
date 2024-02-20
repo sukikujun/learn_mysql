@@ -59,3 +59,12 @@ try {
   die($e->getMessage());
 }
 */
+
+-- isolation
+set session transaction isolation level read committed;
+select @@tx_isolation;
+
+begin;
+update stu set sname = 'houdunren' where id = 1;
+rollback;
+commit;
