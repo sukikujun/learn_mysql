@@ -18,7 +18,44 @@ set autocommit = 0;
 insert into stu(class_id, sname, sex) values(2,'李华',1);
 commit;
 
-
 insert into stu(class_id, sname, sex) values(2,'李华2',1);
 insert into stu(class_id, sname, sex) values(2,'李华3',1);
 commit;
+
+-- php transaction
+/*
+<?php
+$config = [
+  'host' => 'host[:port]',
+  'user' => 'root',
+  'password' => 'password',
+  'database' => 'database',
+  'charset' => 'utf8'
+];
+
+$dns = sprintf("mysql:host=%s;dbname=%s;charset=%s", $config['host'],
+  $config['database'], $config['charset']);
+
+echo $dns.'<br />';
+
+try {
+  $pdo = new PDO($dns, $config['user'], $config['password']);
+  echo 'connect success!<br />';
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+  die($e->getMessage());
+}
+
+try {
+  $pdo->beginTransaction();
+  $pdo->exec("insert into stu(class_id, sname, sex) values(2, '蛻倡脂', 2);");
+  if (true) {
+    throw new Exception('not update role.');
+  }
+  $pdo->exec("update stu set sname = 'houdunren' wherer id = 12;");
+  $pdo->commit();
+} catch (Exception $e) {
+  $pdo->rollBack();
+  die($e->getMessage());
+}
+*/
