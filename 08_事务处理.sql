@@ -68,3 +68,12 @@ begin;
 update stu set sname = 'houdunren' where id = 1;
 rollback;
 commit;
+
+--#不可重复读
+set session transaction isolation level read committed;
+select @@tx_isolation;
+
+begin;
+update stu set sname = 'houdunren2' where id = 1;
+-- rollback;
+commit;
