@@ -23,3 +23,9 @@ update stu set sname = 'houdunren' where sname = '刘玉';
 update stu set sname = 'houdunren5' where sname = '李月';
 commit;
 
+-- 查询范围对锁的影响
+set autocommit = 0;
+update goods set num = 500 where id >= 1;
+-- id=1 不影响
+update goods set num = 500 where id > 1 and id < 5;
+commit;
