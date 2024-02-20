@@ -85,3 +85,12 @@ select @@tx_isolation;
 begin;
 update stu set sname = 'houdunren3' where id = 1;
 commit;
+
+--#幻读
+set session transaction isolation level serializable;
+
+begin;
+--#(repeatable read) update 的时候, 另一事务insert的数据也被修改了
+--# (serializable) 避免幻读，需要事务提交后，另一个事务才能就行update，insert，delete 操作
+update stu set balance = 100 where id = 19;
+commit;
