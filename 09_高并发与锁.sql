@@ -29,3 +29,15 @@ update goods set num = 500 where id >= 1;
 -- id=1 不影响
 update goods set num = 500 where id > 1 and id < 5;
 commit;
+
+-- 悲观锁 for update
+--transaction1
+set autocommit = 0;
+select * from goods where id = 1 for update;
+update goods set num = 0 where id = 1;
+commit;
+
+--transaction2
+set autocommit = 0;
+select * from goods where id = 1 for update;
+commit;
