@@ -41,3 +41,15 @@ commit;
 set autocommit = 0;
 select * from goods where id = 1 for update;
 commit;
+
+-- 乐观锁
+--transaction1
+set autocommit = 0;
+select version from goods where id = 1;
+update goods set num = num-100, version = version+1 where version = 0 and id = 1;
+commit;
+
+--transaction2
+set autocommit = 0;
+--阻塞，t1提交后，version不符合
+update goods set num = num-100, version = version+1 where version = 0 and id = 1;
