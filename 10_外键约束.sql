@@ -14,3 +14,15 @@ create table stu2 (
 alter table stu add constraint stu_class foreign key (class_id) references class(id) on delete cascade;
 
 alter table stu drop foreign key stu_class;
+
+-- cascade / set null / restrict | no action
+alter table stu add constraint stu_class foreign key (class_id) references class(id) on delete set null;
+
+insert into class(id, cname) values (10, 'kensyuu');
+insert into stu (id, sname, class_id) values (20, 'zs', 10);
+
+alter table stu add constraint stu_class foreign key (class_id) references class(id) on delete restrict;
+
+delete from stu where id = 20;
+
+alter table stu add constraint stu_class foreign key (class_id) references class(id) on delete no action;
