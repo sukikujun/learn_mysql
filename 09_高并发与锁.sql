@@ -68,3 +68,9 @@ unlock tables;
 --t2
 -- t1 unlock之前将被挂起，释放锁之后才执行
 insert into goods(name, num) values('pixel', 200);
+
+--practice
+lock table goods write, stu write;
+update goods set num += 100 where id = 1;
+-- ...action
+unlock tables;
