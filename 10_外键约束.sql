@@ -26,3 +26,6 @@ alter table stu add constraint stu_class foreign key (class_id) references class
 delete from stu where id = 20;
 
 alter table stu add constraint stu_class foreign key (class_id) references class(id) on delete no action;
+
+-- cascade / set null / restrict | no action
+alter table stu add constraint stu_class foreign key (class_id) references class(id) on delete cascade on update cascade;
