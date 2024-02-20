@@ -77,3 +77,11 @@ begin;
 update stu set sname = 'houdunren2' where id = 1;
 -- rollback;
 commit;
+
+--#读已提交
+set session transaction isolation level repeatable read;
+select @@tx_isolation;
+
+begin;
+update stu set sname = 'houdunren3' where id = 1;
+commit;
